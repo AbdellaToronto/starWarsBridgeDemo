@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import $ from "jquery";
+import Planet from '../../components/planet/planet';
 
 export default class Planets extends Component {
 
@@ -7,7 +8,7 @@ export default class Planets extends Component {
 
   state = {
     nextUrl: null,
-    planetList: [{name: 'Planet Della'}]
+    planetList: []
   };
 
 
@@ -28,7 +29,18 @@ export default class Planets extends Component {
 
     return <div>
       <h2>Planet List</h2>
-      {this.state.planetList.map(planet => <div key={planet.name}> {planet.name} </div>)}
+
+      <Planet name="Planet Della" climate="Cool" terrain="Rocky" population="40000"></Planet>
+
+      {this.state.planetList.map(planet =>
+        <Planet
+        key={planet.name}
+        name={planet.name}
+        climate={planet.climate}
+        terrain={planet.terrain}
+        population={planet.population}
+        testProp={(res) => res * 4}
+        />)}
       {this.state.nextUrl ?
         <button onClick={() => this.getPlanets(this.state.nextUrl)}>Load more planets...</button> :
         <h6>Nothing Else To Add</h6>}
